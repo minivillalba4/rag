@@ -14,6 +14,7 @@ class Settings(BaseSettings):
     top_k: int = 4
     chunk_size: int = 500
     chunk_overlap: int = 50
+    history_max_turns: int = 4
 
     data_dir: Path = ROOT_DIR / "data" / "sources"
     index_dir: Path = ROOT_DIR / "data" / "index"

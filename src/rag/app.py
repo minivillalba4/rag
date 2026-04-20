@@ -8,7 +8,7 @@ from pathlib import Path
 import gradio as gr
 from langchain_ollama import ChatOllama
 
-from .chain import build_rag_chain
+from .chain import build_rag_chain, format_history, format_sources
 from .config import settings
 from .ingest import add_documents_to_index
 from .loaders import load_documents
@@ -19,7 +19,7 @@ TITLE = "RAG sobre mi CV — asistente para recruiters"
 DESCRIPTION = (
     "Pregunta lo que quieras saber sobre mi experiencia profesional. "
     "El asistente responde únicamente con la información de los documentos "
-    "(CV, proyectos) y cita sus fuentes."
+    "(CV, proyectos) y cita sus fuentes con el fragmento concreto."
 )
 
 EXAMPLES = [
@@ -41,35 +41,27 @@ _llm = ChatOllama(
 )
 
 
-def _format_sources(docs) -> str:
-    if not docs:
-        return ""
-    lines = ["\n\n---\n**Fuentes**"]
-    seen: set[tuple[str, int | None]] = set()
-    for d in docs:
-        src = d.metadata.get("source", "desconocido")
-        page = d.metadata.get("page")
-        key = (src, page)
-        if key in seen:
-            continue
-        seen.add(key)
-        page_str = f" (p.{page + 1})" if page is not None else ""
-        lines.append(f"- `{src}`{page_str}")
-    return "\n".join(lines)
-
-
 async def respond(message: str, history: list[dict], top_k: int):
-    """Async generator: streamea tokens y añade citas al final."""
+    """Async generator: condensa la pregunta con el historial, recupera, streamea y cita."""
     bundle = build_rag_chain(vectorstore=_vectorstore, llm=_llm, top_k=int(top_k))
 
-    docs = await bundle.retriever.ainvoke(message)
+    history_text = format_history(history or [])
+    if history_text:
+        condensed = await bundle.condense_chain.ainvoke(
+            {"chat_history": history_text, "question": message}
+        )
+    else:
+        condensed = message
+    condensed = condensed or message
+
+    docs = await bundle.retriever.ainvoke(condensed)
 
     partial = ""
-    async for chunk in bundle.chain.astream(message):
+    async for chunk in bundle.chain.astream(condensed):
         partial += chunk
         yield partial
 
-    yield partial + _format_sources(docs)
+    yield partial + format_sources(docs)
 
 
 def ingest_uploaded_file(file_obj) -> str:

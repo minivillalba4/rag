@@ -38,10 +38,17 @@ el pitch a la vez.
 - **Ingesta**: PDFs + Markdown → `RecursiveCharacterTextSplitter` (500/50)
   → `OllamaEmbeddings` → FAISS (persistido en `data/index/`).
 - **Retrieval**: top-k similitud; el `k` es ajustable desde la UI.
+- **Memoria conversacional**: un sub-chain condensa la pregunta actual con
+  los últimos turnos (*"¿y en qué empresa?"* → *"¿en qué empresa trabajó
+  con LLMs?"*) antes de recuperar y responder. Si la pregunta ya es
+  autocontenida, se omite el condensador.
 - **Generación**: `ChatOllama` con prompt guardrail en español (no alucina;
-  si no tiene info, lo dice).
+  si no tiene info, lo dice). Cada afirmación lleva una cita inline `[N]`.
 - **UI**: Gradio `ChatInterface` con streaming real (tokens según se
-  generan) y panel de fuentes bajo cada respuesta.
+  generan) y panel de fuentes indexado: cada `[N]` de la respuesta se
+  mapea al fragmento concreto (archivo + página + snippet) en el panel
+  inferior, de forma que el lector sabe exactamente de dónde procede
+  cada dato.
 
 ## Qué demuestra técnicamente
 
@@ -143,7 +150,7 @@ responde correctamente.
 - Evaluación con `ragas` (faithfulness, answer relevancy).
 - Reranker (`bge-reranker-v2-m3`) entre retrieval y LLM.
 - Deploy en Hugging Face Spaces con fallback a Groq cuando no hay Ollama.
-- Chat con memoria conversacional multi-turno (rewriting de la pregunta).
+- ~~Chat con memoria conversacional multi-turno (rewriting de la pregunta).~~ ✅ Hecho.
 
 ## Licencia
 
