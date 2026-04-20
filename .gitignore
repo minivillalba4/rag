@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Virtualenvs
+.venv/
+venv/
+env/
+
+# Env files
+.env
+.env.local
+
+# FAISS index (re-generable)
+data/index/
+
+# User-provided sources that are not committed
+data/sources/*.pdf
+!data/sources/.gitkeep
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+
+# Gradio
+gradio_cached_examples/
+flagged/
