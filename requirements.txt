@@ -1,0 +1,14 @@
+langchain-core>=1.2,<2
+langchain-community>=0.4,<0.5
+langchain>=1.2,<2
+langchain-classic>=1.0,<2
+langchain-ollama>=1.1,<2
+langchain-groq>=1.1,<2
+langchain-huggingface>=1.2,<2
+langchain-text-splitters>=1.1,<2
+sentence-transformers>=3.0
+pydantic-settings>=2.5,<3
+gradio>=6.0,<7
+faiss-cpu>=1.8,<2
+pypdf>=6.0,<7
+reportlab>=4.0,<5

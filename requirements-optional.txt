@@ -1,0 +1,9 @@
+# Reranker cruzado (arrastra torch; ~700 MB adicionales)
+sentence-transformers>=3.0
+
+# Evaluacion con RAGAS
+ragas==0.2.10
+datasets==3.1.0
+
+# Desarrollo
+pytest>=8.0

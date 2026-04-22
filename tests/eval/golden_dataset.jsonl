@@ -1,0 +1,12 @@
+{"question": "¿Qué experiencia tiene con LangChain y RAG?", "ground_truth": "Diseñó e implementó un sistema RAG en producción sobre documentación interna usando LangChain, FAISS y Ollama en Empresa Ejemplo S.L. (2022 – actualidad)."}
+{"question": "¿Qué stack de backend domina?", "ground_truth": "FastAPI, Flask, PostgreSQL, Redis y Docker."}
+{"question": "¿Qué nivel de inglés tiene?", "ground_truth": "C1, apto para entornos técnicos y reuniones internacionales."}
+{"question": "¿En qué empresa trabajó entre 2019 y 2022 y qué hacía?", "ground_truth": "En Consultora Tech como desarrollador backend: APIs REST en FastAPI, PostgreSQL, Redis e integraciones con proveedores externos."}
+{"question": "¿Tiene experiencia con despliegue en la nube?", "ground_truth": "Sí, con AWS (EC2, S3, Lambda), Docker Compose y CI/CD en GitHub Actions."}
+{"question": "¿Qué F1 obtuvo el clasificador de tickets?", "ground_truth": "F1 de 0.89 clasificando tickets de soporte en 12 categorías."}
+{"question": "¿Cuánto redujo la latencia del pipeline de embeddings?", "ground_truth": "Un 40 % optimizando el pipeline de embeddings y el chunking."}
+{"question": "¿Qué formación tiene?", "ground_truth": "Grado/Máster en Ingeniería Informática, y cursos de LLM Engineering (DeepLearning.AI) y Advanced RAG (LlamaIndex)."}
+{"question": "¿Qué proyectos personales destaca?", "ground_truth": "Un RAG personal sobre su CV con Ollama+LangChain+Gradio, un clasificador de tickets de soporte y un dashboard analítico en Streamlit+DuckDB."}
+{"question": "¿Qué herramientas de NLP/IA menciona en su stack?", "ground_truth": "LangChain, HuggingFace, PyTorch, sentence-transformers, FAISS, Ollama, RAG y fine-tuning ligero con LoRA."}
+{"question": "¿Tiene experiencia con Kubernetes?", "ground_truth": "No tengo esa información en los documentos disponibles."}
+{"question": "¿Cuál es su salario actual?", "ground_truth": "No tengo esa información en los documentos disponibles."}

@@ -1,0 +1,46 @@
+services:
+  ollama:
+    image: ollama/ollama:latest
+    volumes:
+      - ollama_models:/root/.ollama
+    healthcheck:
+      test: ["CMD", "ollama", "list"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    restart: unless-stopped
+
+  ollama-pull:
+    image: ollama/ollama:latest
+    depends_on:
+      ollama:
+        condition: service_healthy
+    environment:
+      - OLLAMA_HOST=ollama:11434
+    entrypoint: >
+      sh -c "ollama pull qwen2.5:7b-instruct && ollama pull nomic-embed-text"
+    restart: "no"
+
+  rag:
+    build: .
+    depends_on:
+      ollama-pull:
+        condition: service_completed_successfully
+    environment:
+      - OLLAMA_BASE_URL=http://ollama:11434
+      - GRADIO_SERVER_NAME=0.0.0.0
+      - DATA_DIR=/app/data/sources
+      - INDEX_DIR=/app/data/index
+      - ENABLE_RERANKER=false
+      - LOG_LEVEL=INFO
+    ports:
+      - "7860:7860"
+    volumes:
+      - rag_sources:/app/data/sources
+      - rag_index:/app/data/index
+    restart: unless-stopped
+
+volumes:
+  ollama_models:
+  rag_sources:
+  rag_index:

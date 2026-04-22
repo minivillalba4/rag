@@ -1,0 +1,40 @@
+# Reglas AI de VSCode
+.github/instructions/codacy.instructions.md
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+.venv/
+venv/
+
+# Entorno y secretos
+.env
+
+# Artefactos del RAG
+data/index/
+# El CV por defecto SÍ se versiona para que el Space lo tenga al arrancar.
+# Si en tu deploy privado no quieres subir el corpus, descomenta las 3 líneas siguientes.
+# data/sources/*.pdf
+# data/sources/*.md
+# data/sources/*.txt
+!data/sources/.gitkeep
+
+# Resultados de evaluación
+tests/eval/results/*.csv
+
+# Editores/IDEs
+.vscode/
+.idea/
+
+# Logs y caches varios
+*.log
+gradio_cached_examples/
+.hf-space-key
+hf_token*
+*.pem
+*.key
