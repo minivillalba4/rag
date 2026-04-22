@@ -27,7 +27,11 @@ def format_history(history: list[dict[str, Any]], window: int | None = None) -> 
     lines: list[str] = []
     for msg in recent:
         role = msg.get("role")
-        content = (msg.get("content") or "").strip()
+        raw = msg.get("content")
+        if raw is None:
+            continue
+        content = raw if isinstance(raw, str) else str(raw)
+        content = content.strip()
         if not content:
             continue
         speaker = "Usuario" if role == "user" else "Asistente"

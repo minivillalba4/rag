@@ -11,8 +11,7 @@ from functools import partial
 import gradio as gr
 
 from ..bootstrap import AppServices
-from ..config import settings
-from .handlers import ingest_uploaded_file, respond
+from .handlers import respond
 
 
 TITLE = "RAG sobre mi CV — asistente para recruiters"
@@ -33,50 +32,13 @@ EXAMPLES = [
 
 def build_demo(services: AppServices) -> gr.Blocks:
     respond_fn = partial(respond, services)
-    ingest_fn = partial(ingest_uploaded_file, services)
 
     with gr.Blocks(title=TITLE) as demo:
         gr.Markdown(f"# {TITLE}\n\n{DESCRIPTION}")
-
-        with gr.Row():
-            with gr.Column(scale=1):
-                gr.Markdown("### Ajustes")
-                top_k = gr.Slider(
-                    minimum=1,
-                    maximum=8,
-                    value=settings.top_k,
-                    step=1,
-                    label="Fragmentos a recuperar (top_k)",
-                )
-                enable_reranker = gr.Checkbox(
-                    value=settings.enable_reranker,
-                    label="Reranker cruzado (más lento, más preciso)",
-                )
-                gr.Markdown("### Añadir documento")
-                upload = gr.File(
-                    label="Sube un PDF extra",
-                    file_types=[".pdf"],
-                    type="filepath",
-                )
-                upload_status = gr.Markdown()
-                upload.change(
-                    fn=ingest_fn,
-                    inputs=[upload],
-                    outputs=[upload_status],
-                )
-
-            with gr.Column(scale=3):
-                gr.ChatInterface(
-                    fn=respond_fn,
-                    additional_inputs=[top_k, enable_reranker],
-                    examples=[[q] for q in EXAMPLES],
-                    cache_examples=False,
-                )
-
-        gr.Markdown(
-            "---\n*Stack: Ollama + LangChain + FAISS + Gradio. "
-            f"Modelo: `{settings.ollama_model}` · "
-            f"Embeddings: `{settings.embed_model}`.*"
+        gr.ChatInterface(
+            fn=respond_fn,
+            examples=[[q] for q in EXAMPLES],
+            cache_examples=False,
         )
 
     return demo
