@@ -9,6 +9,8 @@ from __future__ import annotations
 
 import logging
 
+import gradio as gr
+
 from src.rag.bootstrap import build_app_services
 from src.rag.config import settings
 from src.rag.logging_config import configure_logging
@@ -56,6 +58,7 @@ def main() -> None:
     demo.launch(
         server_name=settings.gradio_server_name,
         server_port=settings.gradio_server_port,
+        theme=gr.themes.Soft(),
     )
 
 

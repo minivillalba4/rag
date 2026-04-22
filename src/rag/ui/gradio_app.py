@@ -35,7 +35,7 @@ def build_demo(services: AppServices) -> gr.Blocks:
     respond_fn = partial(respond, services)
     ingest_fn = partial(ingest_uploaded_file, services)
 
-    with gr.Blocks(title=TITLE, theme=gr.themes.Soft()) as demo:
+    with gr.Blocks(title=TITLE) as demo:
         gr.Markdown(f"# {TITLE}\n\n{DESCRIPTION}")
 
         with gr.Row():
@@ -68,7 +68,6 @@ def build_demo(services: AppServices) -> gr.Blocks:
             with gr.Column(scale=3):
                 gr.ChatInterface(
                     fn=respond_fn,
-                    type="messages",
                     additional_inputs=[top_k, enable_reranker],
                     examples=[[q] for q in EXAMPLES],
                     cache_examples=False,
