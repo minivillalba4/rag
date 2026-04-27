@@ -238,23 +238,39 @@ html, body {
     background: transparent !important;
 }
 
-/* Burbuja del usuario: tinta sólida con texto blanco */
+/* Burbuja del usuario: tinta sólida con texto blanco.
+   Selectores con `[class*="user"]` para capturar las clases hash de Svelte
+   que Gradio 6 genera (.user-row.svelte-1a2b3c4, etc.) y que tienen mayor
+   especificidad que selectores con clase simple. */
 .user .message-bubble-border,
 .user-row .message-bubble-border,
 .message.user,
 [data-testid="user"],
 [data-testid="user"] .message-bubble-border,
-[data-testid="user-message"] {
+[data-testid="user-message"],
+.gradio-container [class*="user-row"],
+.gradio-container [class*="user-row"] [class*="message"] {
     background: #0F172A !important;
+    background-color: #0F172A !important;
     border: 1px solid #0F172A !important;
     border-radius: 12px 4px 12px 12px !important;
     color: #FFFFFF !important;
 }
 
+/* Texto blanco forzado en TODOS los descendientes de la burbuja del usuario.
+   El selector `[class*="user"]` matchea cualquier clase que contenga "user"
+   (incluidas .user-row.svelte-XXX), evitando la guerra de especificidad
+   contra el CSS interno de Gradio. */
 .user .message-bubble-border *,
+.user-row *,
 [data-testid="user"] *,
-[data-testid="user-message"] * {
+[data-testid="user-message"] *,
+.gradio-container [class*="user-row"] *,
+.gradio-container [class*="user"] [class*="message"] *,
+.gradio-container [class*="user"] [class*="prose"],
+.gradio-container [class*="user"] [class*="prose"] * {
     color: #FFFFFF !important;
+    -webkit-text-fill-color: #FFFFFF !important;
     background: transparent !important;
 }
 
