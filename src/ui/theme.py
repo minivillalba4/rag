@@ -326,30 +326,61 @@ button.secondary:hover, button[variant="secondary"]:hover {
     border-color: #CBD5E1 !important;
 }
 
-/* Ejemplos — píldoras sobrias */
+/* Ejemplos — píldoras con contraste alto. Selectores múltiples y `*` para
+   sobreescribir todos los descendientes con clases internas .svelte-* que
+   Gradio renderiza dentro del botón. */
 .examples,
-[data-testid="examples"] {
+[data-testid="examples"],
+.gradio-container .examples,
+.gradio-container [data-testid="examples"] {
     margin-top: 1rem;
 }
 
 .examples button,
-[data-testid="examples"] button {
+[data-testid="examples"] button,
+.gradio-container .examples button,
+.gradio-container [data-testid="examples"] button,
+.examples [role="button"],
+[data-testid="example"] {
     font-family: 'Inter', system-ui, sans-serif !important;
-    font-size: 0.875rem !important;
+    font-size: 0.9rem !important;
     font-weight: 500 !important;
     background: #FFFFFF !important;
-    color: #475569 !important;
-    border: 1px solid #E2E8F0 !important;
+    background-color: #FFFFFF !important;
+    color: #1E293B !important;
+    border: 1px solid #94A3B8 !important;
     border-radius: 999px !important;
-    padding: 8px 16px !important;
+    padding: 9px 18px !important;
     transition: all 150ms ease !important;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.06) !important;
+}
+
+/* Forzar el color del texto en TODOS los descendientes del botón
+   (Gradio mete spans/divs internos que se quedan con su color por defecto). */
+.examples button *,
+[data-testid="examples"] button *,
+.gradio-container .examples button *,
+.examples [role="button"] *,
+[data-testid="example"] * {
+    color: #1E293B !important;
+    -webkit-text-fill-color: #1E293B !important;
+    background: transparent !important;
 }
 
 .examples button:hover,
-[data-testid="examples"] button:hover {
-    background: #EFF6FF !important;
-    color: #1E40AF !important;
+[data-testid="examples"] button:hover,
+.gradio-container .examples button:hover,
+.examples [role="button"]:hover {
+    background: #1E40AF !important;
+    background-color: #1E40AF !important;
     border-color: #1E40AF !important;
+}
+
+.examples button:hover *,
+[data-testid="examples"] button:hover *,
+.examples [role="button"]:hover * {
+    color: #FFFFFF !important;
+    -webkit-text-fill-color: #FFFFFF !important;
 }
 
 /* Markdown del bot: enlaces, separadores, énfasis */
