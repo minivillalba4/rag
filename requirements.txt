@@ -1,0 +1,19 @@
+# Dependencias de runtime para la imagen Docker.
+#
+# Versiones fijadas con rangos minor-locked: actualiza patches automáticamente
+# pero protege ante breaking changes mayores. Auditadas contra el entorno
+# conda `rag` donde la app está verificada funcionando.
+#
+# Nota: sentence-transformers arrastra torch como dependencia transitiva.
+# La imagen final pesa ~3-4 GB por torch. Para optimizar a futuro, instalar
+# torch desde el índice CPU-only de PyTorch.
+
+gradio>=6.3,<7.0                   # ChatInterface + theming
+langchain-core>=1.3,<2.0           # Document, runnables base
+langchain-community>=0.4,<0.5      # FAISS vectorstore
+langchain-huggingface>=1.2,<2.0    # HuggingFaceEmbeddings
+langchain-text-splitters>=1.1,<2.0 # RecursiveCharacterTextSplitter
+faiss-cpu>=1.13,<2.0               # Vectorstore in-memory
+sentence-transformers>=5.2,<6.0    # Modelo all-MiniLM-L6-v2
+huggingface_hub>=0.30,<1.0         # InferenceClient (Cerebras + Groq)
+python-dotenv>=1.2,<2.0            # Lectura de .env

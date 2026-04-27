@@ -1,0 +1,69 @@
+# =============================================================================
+# .gitignore — RAG Portfolio
+# =============================================================================
+
+# Secretos
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Caches de Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+.eggs/
+
+# Pytest / cobertura
+.pytest_cache/
+.coverage
+htmlcov/
+*.cover
+
+# Linters / type checkers
+.mypy_cache/
+.ruff_cache/
+.tox/
+.nox/
+
+# pyenv
+.python-version
+
+# Virtual envs locales
+.venv/
+venv/
+env/
+.conda/
+
+# Build / dist artefactos
+build/
+dist/
+*.egg
+
+# IDE / editor
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Notebooks: outputs y checkpoints (el .ipynb sí entra en git)
+.ipynb_checkpoints/
+notebooks/.ipynb_checkpoints/
+
+# Cache de modelos descargados (HuggingFace, sentence-transformers)
+.cache/
+.huggingface/
+
+# Logs locales
+*.log
+logs/
+
+# Plan files / herramientas de agentes
+.claude/
+.agents/
+plans/

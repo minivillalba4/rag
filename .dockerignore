@@ -1,0 +1,82 @@
+# =============================================================================
+# Ficheros que NO entran en la imagen Docker.
+#
+# Mantener la imagen pequeña y reproducible: evitar caches locales, secretos,
+# notebooks, suite de tests, IDE config y artefactos de desarrollo.
+# =============================================================================
+
+# Git
+.git/
+.gitignore
+.gitattributes
+
+# Secretos (las credenciales se inyectan en runtime con `docker run -e ...`
+# o con un .env montado, NO copiándolas a la imagen).
+.env
+.env.*
+*.pem
+*.key
+
+# Documentación / contenido didáctico no necesario en runtime
+notebooks/
+teoria/
+README.md
+*.md
+!data/profile/profile.md
+
+# Tests y artefactos de pytest
+tests/
+.pytest_cache/
+.coverage
+htmlcov/
+*.cover
+
+# Linters / type checkers
+.mypy_cache/
+.ruff_cache/
+.tox/
+.nox/
+
+# Dockerfile y .dockerignore no aportan al runtime
+Dockerfile
+Dockerfile.*
+.dockerignore
+
+# Caches de Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+.eggs/
+
+# Virtual envs / paquetes locales
+.venv/
+venv/
+env/
+.conda/
+*.egg
+
+# IDE / editor
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# Cache de modelos descargados localmente (la imagen los baja en runtime)
+.cache/
+.huggingface/
+
+# Build / dist artefactos
+build/
+dist/
+
+# Claude / agentes / herramientas
+.claude/
+.agents/
+.github/
+
+# Plan files generados por Claude
+plans/
