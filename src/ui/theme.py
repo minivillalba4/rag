@@ -133,10 +133,11 @@ html, body {
     margin-bottom: 0.5rem;
 }
 
-/* Subtítulo (description del ChatInterface): gris medio, sin italic.
-   Selector más permisivo (a cualquier nivel) pero excluyendo el chat para
-   no aplicar el color/tamaño de subtítulo al markdown del bot. */
-.gradio-container .prose:not(.chatbot .prose):not([data-testid="chatbot"] .prose):not(.message *):not([data-testid="bot-message"] *):not(.bubble-wrap *) {
+/* Subtítulo (description del ChatInterface). Por defecto, todos los `.prose`
+   reciben el color del subtítulo. La regla del chat (más abajo) tiene mayor
+   especificidad para sobrescribirlo dentro de las burbujas. */
+.gradio-container .prose,
+.gradio-container .prose p {
     font-family: 'Inter', system-ui, sans-serif !important;
     font-size: 0.95rem !important;
     line-height: 1.55 !important;
@@ -147,10 +148,15 @@ html, body {
     opacity: 1 !important;
 }
 
-.gradio-container .prose:not(.chatbot .prose):not([data-testid="chatbot"] .prose):not(.message *):not([data-testid="bot-message"] *):not(.bubble-wrap *) p {
-    color: #475569 !important;
-    margin: 0 !important;
-    font-style: normal !important;
+/* Selección de texto: usa la paleta azul corporativa en lugar del morado
+   por defecto del navegador. */
+::selection {
+    background-color: rgba(59, 130, 246, 0.35) !important;
+    color: inherit !important;
+}
+::-moz-selection {
+    background-color: rgba(59, 130, 246, 0.35) !important;
+    color: inherit !important;
 }
 
 /* Reset duro del `.prose` dentro del chat: el markdown del bot va en
@@ -252,15 +258,19 @@ html, body {
     background: transparent !important;
 }
 
-/* Textarea / input */
+/* Textarea / input — fondo oscuro con texto blanco. Misma estética que la
+   burbuja del usuario una vez enviado el mensaje: lo que el reclutador
+   escribe queda visualmente igual a lo que ya envió. */
 textarea, input[type="text"],
 .gradio-container textarea,
 .gradio-container input[type="text"] {
     font-family: 'Inter', system-ui, sans-serif !important;
     font-size: 0.95rem !important;
-    background: #FFFFFF !important;
-    color: #0F172A !important;
-    border: 1px solid #E2E8F0 !important;
+    background: #0F172A !important;
+    color: #FFFFFF !important;
+    -webkit-text-fill-color: #FFFFFF !important;
+    caret-color: #FFFFFF !important;
+    border: 1px solid #1E293B !important;
     border-radius: 10px !important;
     padding: 12px 14px !important;
     transition: border-color 150ms ease, box-shadow 150ms ease !important;
@@ -268,8 +278,8 @@ textarea, input[type="text"],
 
 textarea:focus, input[type="text"]:focus {
     outline: none !important;
-    border-color: #1E40AF !important;
-    box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.12) !important;
+    border-color: #3B82F6 !important;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25) !important;
 }
 
 textarea::placeholder, input::placeholder {
