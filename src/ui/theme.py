@@ -90,10 +90,19 @@ CUSTOM_CSS = """
     color-scheme: light !important;
 }
 
+/* El body de la página HF (fuera del container Gradio) hereda el color de
+   sistema. En el subdominio *.hf.space queda oscuro por defecto y crea
+   franjas negras a los lados. Lo igualamos al fondo del container. */
+html, body {
+    background-color: #F8FAFC !important;
+    margin: 0 !important;
+    min-height: 100vh !important;
+}
+
 .gradio-container {
-    max-width: 1080px !important;
+    max-width: 1200px !important;
     margin: 0 auto !important;
-    padding: 2rem 1.5rem 3rem !important;
+    padding: 1.25rem 1.5rem 1.5rem !important;
     background-color: #F8FAFC !important;
     background-image: none !important;
     font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif !important;
@@ -104,11 +113,11 @@ CUSTOM_CSS = """
 .gradio-container h1 {
     font-family: 'Fraunces', Georgia, serif !important;
     font-weight: 600 !important;
-    font-size: clamp(2rem, 4vw, 2.5rem) !important;
+    font-size: clamp(1.75rem, 3vw, 2.25rem) !important;
     line-height: 1.15 !important;
     letter-spacing: -0.02em !important;
     color: #0F172A !important;
-    margin: 0 0 0.5rem !important;
+    margin: 0 0 0.4rem !important;
     position: relative;
 }
 
@@ -116,25 +125,31 @@ CUSTOM_CSS = """
     content: "PORTFOLIO · RAG CONVERSACIONAL";
     display: block;
     font-family: 'JetBrains Mono', ui-monospace, monospace;
-    font-size: 0.7rem;
+    font-size: 0.68rem;
     font-weight: 500;
     letter-spacing: 0.18em;
     text-transform: uppercase;
     color: #1E40AF;
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.5rem;
 }
 
 /* Subtítulo (description del ChatInterface): gris medio, sin italic.
-   IMPORTANTE: no aplicar a `.prose` dentro del chat — Gradio 6 mete el
-   markdown del bot en `.prose` y heredaría estos estilos. */
-.gradio-container > div > .prose,
-.gradio-container > .prose {
+   Selector más permisivo (a cualquier nivel) pero excluyendo el chat para
+   no aplicar el color/tamaño de subtítulo al markdown del bot. */
+.gradio-container .prose:not(.chatbot .prose):not([data-testid="chatbot"] .prose):not(.message *):not([data-testid="bot-message"] *):not(.bubble-wrap *) {
     font-family: 'Inter', system-ui, sans-serif !important;
-    font-size: 1rem !important;
-    line-height: 1.6 !important;
+    font-size: 0.95rem !important;
+    line-height: 1.55 !important;
     color: #475569 !important;
-    max-width: 62ch;
-    margin: 0 0 1.75rem !important;
+    max-width: 70ch;
+    margin: 0 0 1rem !important;
+    font-style: normal !important;
+    opacity: 1 !important;
+}
+
+.gradio-container .prose:not(.chatbot .prose):not([data-testid="chatbot"] .prose):not(.message *):not([data-testid="bot-message"] *):not(.bubble-wrap *) p {
+    color: #475569 !important;
+    margin: 0 !important;
     font-style: normal !important;
 }
 

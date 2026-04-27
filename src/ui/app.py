@@ -102,16 +102,16 @@ def gradio_chat(message: str, history):
 def _build_chatbot(config: AppConfig) -> gr.Chatbot:
     visitor_path, ismael_path = build_avatars(config.project_root)
     return gr.Chatbot(
-        height=720,
+        height="72vh",
         show_label=False,
         buttons=["copy"],
         avatar_images=(visitor_path, ismael_path),
         placeholder=(
-            "<div style=\"font-family: 'Fraunces', Georgia, serif; font-size: 1.1rem; "
-            "color: #5d503d; line-height: 1.5; padding: 2.5rem 1.5rem; text-align: center;\">"
+            "<div style=\"font-family: 'Inter', system-ui, sans-serif; font-size: 0.95rem; "
+            "color: #475569; line-height: 1.5; padding: 1.25rem 1rem; text-align: center;\">"
             "<div style=\"font-family: 'JetBrains Mono', ui-monospace, monospace; "
-            "font-size: 0.7rem; letter-spacing: 0.22em; text-transform: uppercase; "
-            "color: #c44d34; margin-bottom: 1rem;\">— Empezar conversación —</div>"
+            "font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; "
+            "color: #1E40AF; margin-bottom: 0.6rem;\">Empezar conversación</div>"
             "Pregúntame por mi experiencia, los proyectos en los que he trabajado "
             "o el stack técnico que domino."
             "</div>"
@@ -144,6 +144,7 @@ def build_demo(config: AppConfig | None = None) -> gr.ChatInterface:
             "y filtra peticiones fuera de alcance."
         ),
         examples=EXAMPLE_QUESTIONS,
+        fill_height=True,
     )
 
 
