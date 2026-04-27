@@ -88,7 +88,7 @@ def load_config() -> AppConfig:
         llm_model_name="meta-llama/Llama-3.3-70B-Instruct",
         primary_provider="cerebras",
         fallback_provider="groq",
-        max_tokens=500,
+        max_tokens=300,
         temperature=0.2,
         hf_token=(os.getenv("HF_TOKEN") or "").strip(),
         contact_email=(os.getenv("CONTACT_EMAIL") or "").strip(),

@@ -102,7 +102,7 @@ def gradio_chat(message: str, history):
 def _build_chatbot(config: AppConfig) -> gr.Chatbot:
     visitor_path, ismael_path = build_avatars(config.project_root)
     return gr.Chatbot(
-        height=540,
+        height=720,
         show_label=False,
         buttons=["copy"],
         avatar_images=(visitor_path, ismael_path),

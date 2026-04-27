@@ -91,9 +91,9 @@ CUSTOM_CSS = """
 }
 
 .gradio-container {
-    max-width: 880px !important;
+    max-width: 1080px !important;
     margin: 0 auto !important;
-    padding: 2.5rem 1.5rem 4rem !important;
+    padding: 2rem 1.5rem 3rem !important;
     background-color: #F8FAFC !important;
     background-image: none !important;
     font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif !important;
